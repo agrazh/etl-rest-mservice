@@ -1,61 +1,23 @@
-from flask import Flask, jsonify, request, render_template
+from flask import Flask
+from flask_restful import Resource, Api
 
-stores = [{
-    'name': 'Store One',
-    'items': [{'name':'Paper A4', 'price': 0.99 }]
-}]
+items = []
 
 app = Flask(__name__)
+api = Api(app)
 
-@app.route('/')
-def home():
-    return render_template('index.html')
+class Item(Resource):
+    def get(self, name):
+        for item in items:
+            if item['name'] == name:
+                return item
+        return {'item': None}, 404
+    
+    def post(self, name):
+        item = {'name': name, 'price': 0}
+        items.append(item)
+        return item, 201
 
-# Endpoints with GET, POST methods
-# POST /store data: {name:}
-@app.route('/store', methods=['POST'])
-def create_store():
-    request_data = request.get_json()
-    new_store = {
-        'name': request_data['name'],
-        'items': []
-    }
-    stores.append(new_store)
-    return jsonify(new_store)
-
-# GET /store/<string:name>
-@app.route('/store/<string:name>')
-def get_store(name):
-    for store in stores:
-        if store['name'] == name:
-            return jsonify(store)
-    return jsonify({'message': 'not found'})
-
-# GET /store
-@app.route('/store')
-def get_stores():
-    return jsonify({'stores': stores})
-
-# POST /store/<string:name>/item {name:, price:}
-@app.route('/store/<string:name>/item', methods=['POST'])
-def create_item_in_store(name):
-    request_data = request.get_json()
-    for store in stores:
-        if store['name'] == name:
-                new_item = {
-                    'name': request_data['name'],
-                    'price': request_data['price']
-                }
-                store['items'].append(new_item)
-                return jsonify(store)
-    return jsonify({'message': 'not found'})
-
-# GET /store/<string:name>/item
-@app.route('/store/<string:name>/item')
-def get_itme_in_store(name):
-    for store in stores:
-        if store['name'] == name:
-            return jsonify({'items': store['items']})
-    return jsonify({'message': 'not found'})
+api.add_resource(Item, '/item/<string:name>')
 
 app.run(port=4000)
