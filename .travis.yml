@@ -1,0 +1,21 @@
+language: python
+python:
+  - "3.7"
+
+install:
+  - pip install -r requirements.txt
+
+script:
+  - make test
+
+# safelist
+branches:
+  only:
+    - master
+
+# blocklist
+branches:
+  except:
+    - hotfix
+    - feature
+    - release
