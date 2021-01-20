@@ -130,6 +130,12 @@ dmypy.json
 
 # VS Code
 .vscode/
+*.code-workspace
 
 # DB files
 .db
+
+# other
+archive/
+code/
+templates/
