@@ -1,4 +1,6 @@
 language: python
+os: linux
+dist: xenial
 python:
   - "3.7"
 
@@ -13,9 +15,9 @@ branches:
   only:
     - master
 
-# blocklist
-branches:
-  except:
-    - hotfix
-    - feature
-    - release
+# # blocklist
+# branches:
+#   except:
+#     - hotfix
+#     - feature
+#     - release
