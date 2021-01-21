@@ -133,7 +133,7 @@ dmypy.json
 *.code-workspace
 
 # DB files
-.db
+*.db
 
 # other
 archive/

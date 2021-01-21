@@ -8,4 +8,4 @@ test:
 	pytest ./tests/test_config.py
 
 # publish:
-# 	npm publish
+# 	python publish.py
