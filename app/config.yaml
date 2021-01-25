@@ -1,12 +1,12 @@
 ---
 port: 4000
-debug: True
+debug: true
 
 # Signed Cookies. Generate a new key with:
 # python -c "from os import urandom; from base64 import b64encode; print(b64encode(urandom(16)).decode('utf-8'))"
 secret_key: 'C7HgDjLdF+nIMvQiAa5yzA=='
 
-user_registration_api: False
+user_registration_api: false
 users:
     - user1: {'login': '', 'pass': ''}
     - user2: {'login': '', 'pass': ''}

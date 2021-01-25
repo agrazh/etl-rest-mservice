@@ -1,0 +1,19 @@
+MySQL:
+  active: false
+  conn_string: db_user:db_pw@localhost:3306/db_name
+PostgreSQL:
+  active: true
+  conn_string: db_user:db_pw@localhost:5432/db_name
+debug: true
+new_val: empty
+new_value: new value from JS
+port: 4000
+secret_key: C7HgDjLdF+nIMvQiAa5yzA==
+user_registration_api: false
+users:
+- user1:
+    login: ''
+    pass: ''
+- user2:
+    login: ''
+    pass: ''

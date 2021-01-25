@@ -1,0 +1,39 @@
+#response-container {
+    display: inline-block;
+    padding: 1rem;
+    margin: 1rem 1rem;
+    font-size: 100%;
+    border: 2px dashed #ccc;
+}
+
+button {
+    font-size: 100%;
+    padding: 0.4rem;
+    text-transform: uppercase;
+    height: 100%;
+}
+
+.endpoint {
+    display: flex;
+    align-items: flex-start;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+
+label {
+    font-weight: bold;
+    display: block;
+    padding-left: 0px;
+    margin-left: 0px;
+}
+
+select {
+    width: 10.5em;
+}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="win-main.css"/>
+</head>
+<body>
+
+<button onClick="getConfig()">Load config</button>&ensp;
+<button onClick="saveConfig('new value from JS')">Save config</button>
+&ensp;&ensp;&ensp;
+<button onClick="getPort()">Start</button></br>
+<hr/>
+
+<div class="row">
+    <div>
+        <label for="port">Port</label>
+        <input type="text" id="port" name="port" maxlength="4" style="width: 10em;">&ensp;
+    </div>
+    <div>
+        <label for="debug">Debug</label>
+        <select name="debug" id="debug">
+            <option value="True">True</option>
+            <option value="False" selected="selected">False</option>
+        </select>&ensp;
+    </div>
+</div>
+
+
+<div class="row">
+    <div>
+        <label for="db">DB</label>
+        <select name="db" id="db">
+            <option value="PostgreSQL" selected="selected">PostgreSQL</option>
+            <option value="MySQL">MySQL</option>
+        </select>&ensp;
+    </div>
+    <div>
+        <label for="connString">Connection string</label>
+        <input type="text" id="connString" name="connString" value="db_user:db_pw@localhost:5432/db_name" style="width: 29em;">
+    </div>
+</div>
+
+
+<div class="row">
+    <div>
+        <label for="endpoint">Endpoint:</label>
+        <input type="text" id="endpoint" name="endpoint" value="/example" style="width: 10em;">&ensp;
+    </div>
+    <div>
+        <label for="sqlQuery">SQL query:</label>
+        <textarea id="sqlQuery" name="sqlQuery" cols="40" rows="2" style="width: 30em;">SELECT * FROM example</textarea>
+    </div>
+</div>
+
+<hr/>
+
+<div id="response-container">Response</div></br>
+<button onClick="getPort()">Show port</button>&ensp;
+<button onClick="getRandomNumber()">Generate</button>
+<script>
+    window.addEventListener('pywebviewready', function() {
+        console.log('LOG: pywebview is ready')
+    })
+
+    let conf;
+
+    function saveConfig(newValue) {
+        pywebview.api.setNewValue(newValue)
+    }
+
+
+    function getPort() {
+        pywebview.api.getPort().then(showResponse);
+        pywebview.api.getPort().then(fillInFields);
+    }
+
+    function fillInFields(response) {
+        document.getElementById('port').value = response.message;
+    }
+
+    function getConfig() {
+        pywebview.api.getConfig().then(captureVar);
+    }
+
+    function captureVar(response) {
+        conf = response;
+        document.getElementById('port').value = response.message.port;
+        document.getElementById('debug').value = response.message.debug;
+    }
+
+    function showResponse(response) {
+        var container = document.getElementById('response-container');
+        container.innerText = response.message;
+    }
+
+    function getRandomNumber() {
+        pywebview.api.getRandomNumber().then(showResponse)
+        // resp = pywebview.api.getRandomNumber()
+        // console.log(resp)
+        // showResponse(resp)
+    }
+
+</script>
+</body>
+</html>
