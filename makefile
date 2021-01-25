@@ -1,5 +1,5 @@
 install:
-	pip install -r packages.txt
+	pip install -r requirements.txt
 
 start:
 	python app.py
